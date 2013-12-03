@@ -25,6 +25,5 @@ public class RemoveMarker {
       }
       entity.addComponent(Pools.get(RemoveMeComponent.class).obtain());
       world.changedEntity(entity);
-      System.out.println("debug");
    }
 }
