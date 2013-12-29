@@ -1,7 +1,7 @@
 package eu32k.gdx.artemis.extension;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -33,7 +33,7 @@ public class EntityActor extends Group {
    }
 
    @Override
-   public void draw(SpriteBatch batch, float parentAlpha) {
+   public void draw(Batch batch, float parentAlpha) {
       Color color = getColor();
 
       float alpha = color.a * parentAlpha;
