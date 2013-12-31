@@ -1,5 +1,6 @@
 package eu32k.gdx.artemis.extension.system;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -38,7 +39,7 @@ public class PhysicsSystem extends EntitySystem {
 
    @Override
    protected void processEntities(ImmutableBag<Entity> entities) {
-      box2dWorld.step(1.0f / 45.0f, 6, 2);
+      box2dWorld.step(Gdx.graphics.getDeltaTime(), 6, 2);
       for (int i = 0; i < entities.size(); i++) {
          process(entities.get(i));
       }
