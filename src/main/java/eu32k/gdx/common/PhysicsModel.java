@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 
 import eu32k.gdx.artemis.base.Entity;
@@ -36,6 +37,34 @@ public class PhysicsModel {
 
       loader = new BodyEditorLoader(Gdx.files.internal("models/" + fileName));
       loader.attachFixture(body, modelName, fixtureDef, scale);
+      body.resetMassData();
+
+      for (Fixture fixture : body.getFixtureList()) {
+         fixture.setUserData(e);
+      }
+   }
+
+   public PhysicsModel(World box2dWorld, Entity e, Shape shape, float density, float friction, float restitution, Bits bits, boolean bullet, float scale) {
+
+      FixtureDef fixtureDef = new FixtureDef();
+      fixtureDef.density = density;
+      fixtureDef.friction = friction;
+      fixtureDef.restitution = restitution;
+      fixtureDef.filter.categoryBits = bits.category;
+      fixtureDef.filter.maskBits = bits.mask;
+      fixtureDef.shape = shape;
+
+      BodyDef bodyDef = new BodyDef();
+      bodyDef.type = BodyType.DynamicBody;
+      bodyDef.bullet = bullet;
+
+      body = box2dWorld.createBody(bodyDef);
+
+      body.setLinearDamping(0.1f);
+      body.setAngularDamping(0.1f);
+
+      body.createFixture(fixtureDef);
+
       body.resetMassData();
 
       for (Fixture fixture : body.getFixtureList()) {
